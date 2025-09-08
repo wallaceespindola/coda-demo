@@ -46,17 +46,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: OWASP Dependency-Check (scan repo)
-        uses: jeremylong/gh-action-dependency-check@v9
+      - name: Run OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        id: depcheck
         with:
-          format: 'HTML,JSON'
+          project: 'coda-demo'
           path: '.'
+          format: 'HTML,JSON'
           args: >-
             --enableRetired
-            --noupdate
-          # Set failOnCVSS to 0 to not fail the build on findings by default.
-          # Change to 7 (or desired threshold) to fail on High/Critical.
-          failOnCVSS: '0'
+            --failOnCVSS 0
 
       - name: Upload Dependency-Check reports
         uses: actions/upload-artifact@v4
