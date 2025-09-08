@@ -52,10 +52,11 @@ jobs:
         with:
           project: 'coda-demo'
           path: '.'
-          format: 'HTML,JSON'
+          format: 'ALL'
           args: >-
             --enableRetired
             --failOnCVSS 0
+            --noupdate
 
       - name: Upload Dependency-Check reports
         uses: actions/upload-artifact@v4
